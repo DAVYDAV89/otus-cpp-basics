@@ -17,18 +17,18 @@ int main(int argc, char** argv)
     // To check - does use print some other argument we should check if the argc >= 2
     if (argc >= 2) {
         std::string arg1_value{ argv[1] };
-        if (arg1_value == "-parameter") {
-            std::cout << "-parameter argument was detected!" << std::endl;
+        if (arg1_value == "-max") {
+            std::cout << "max argument was detected!" << std::endl;
 
             // We've detected the '-parameter' argument. And we extect that after this argument there is a value:
             int parameter_value = 0;
             if (argc < 3) {
-                std::cout << "Wrong usage! The argument '-parameter' requires some value!" << std::endl;
+                std::cout << "Wrong usage! The argument '-max' requires some value!" << std::endl;
                 return -1;
             }
             // We need to parse the string to the int value
             max_value = std::stoi(argv[2]);
-            std::cout << "The '-parameter' value = " << max_value << std::endl;
+            std::cout << "The '-max' value = " << max_value << std::endl;
         }
     }
 
