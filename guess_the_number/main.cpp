@@ -2,6 +2,9 @@
 #include <ctime>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -34,10 +37,9 @@ void read_the_high_score()
         return;
     }
 
-    cout << "High scores table:" << endl;
-
     string username;
     int high_score = 0;
+    vector<pair<string, int>> records;
     while (true) {
         // Read the username first
         in_file >> username;
@@ -46,13 +48,41 @@ void read_the_high_score()
         // Ignore the end of line symbol
         in_file.ignore();
 
+        records.push_back(make_pair(username, high_score));
+
         if (in_file.fail()) {
             break;
         }
-
-        // Print the information to the screen
-        cout << username << '\t' << high_score << endl;
     }
+
+    // Создаем словарь для хранения рекордов
+    unordered_map<string, vector<int>> highScores;
+
+    // Обрабатываем каждую запись в таблице рекордов
+    for (const auto& record : records) {
+        const string& user = record.first;
+        int score = record.second;
+
+        // Если пользователь уже есть в словаре, добавляем новый результат
+        if (highScores.count(user)) {
+            highScores[user].push_back(score);
+        }
+        // Если пользователь еще не встречался, создаем новую запись
+        else {
+            highScores[user] = {score};
+        }
+    }
+
+    // Выводим только минимальные значения попыток для каждого пользователя
+    cout << "High scores table:" << endl;
+    for (const auto& entry : highScores) {
+        const string& user = entry.first;
+        const vector<int>& scores = entry.second;
+
+        int minScore = *min_element(scores.begin(), scores.end());
+        cout << user << " " << minScore << endl;
+    }
+    // Print the information to the screen
 }
 
 int main(int argc, char** argv)
@@ -65,19 +95,19 @@ int main(int argc, char** argv)
 
     // To check - does use print some other argument we should check if the argc >= 2
     if (argc >= 2) {
-        std::string arg1_value{ argv[1] };
+        string arg1_value{ argv[1] };
         if (arg1_value == "-max") {
-            std::cout << "max argument was detected!" << std::endl;
+            cout << "max argument was detected!" << endl;
 
             // We've detected the '-parameter' argument. And we extect that after this argument there is a value:
             int parameter_value = 0;
             if (argc < 3) {
-                std::cout << "Wrong usage! The argument '-max' requires some value!" << std::endl;
+                cout << "Wrong usage! The argument '-max' requires some value!" << endl;
                 return -1;
             }
             // We need to parse the string to the int value
-            max_value = std::stoi(argv[2]);
-            std::cout << "The '-max' value = " << max_value << std::endl;
+            max_value = stoi(argv[2]);
+            cout << "The '-max' value = " << max_value << endl;
         }
         if (arg1_value == "-table") {
             read_the_high_score();
