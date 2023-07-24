@@ -5,4 +5,9 @@ project(guess_the_number LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(guess_the_number main.cpp)
+add_executable(guess_the_number
+    main.cpp
+    readwrite.h readwrite.cpp
+    getmaxvalue.h getmaxvalue.cpp
+    )
+
