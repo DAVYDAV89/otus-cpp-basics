@@ -8,7 +8,7 @@ class Color {
     double green() const;
     double blue() const;
 
-  private:
+//  private:
     double r{};
     double g{};
     double b{};

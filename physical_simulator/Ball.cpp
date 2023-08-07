@@ -5,20 +5,13 @@
  * Задает скорость объекта
  * @param velocity новое значение скорости
  */
-//Ball::Ball(double _x, double _y, Point _vector)
-//    : m_x(_x)
-//    , m_y(_y)
-//    , m_vector(_vector)
-//{
 
-//}
-
-Ball::Ball(double _radius, double _x, double _y, double _vx, double _vy , double _red, double _green, double _blue)
+Ball::Ball(double _radius, Point _point, double _vx, double _vy , Color _color)
 {
     m_radius = _radius;
-    m_center = Point(_x, _y);
+    m_center = _point;
     m_velocity.setVector(Point(_vx, _vy));
-    m_color = Color(_red, _green, _blue);
+    m_color = _color;
 }
 
 void Ball::setVelocity(const Velocity& velocity) {

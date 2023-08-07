@@ -2,6 +2,7 @@
 #include "Painter.h"
 #include <fstream>
 
+
 // Длительность одного тика симуляции.
 // Подробнее см. update()
 // Изменять не следует
@@ -11,6 +12,20 @@ static constexpr double timePerTick = 0.001;
  * Конструирует объект мира для симуляции
  * @param worldFilePath путь к файлу модели мира
  */
+
+std::istream& operator>>(std::istream& stream, Color& variable) {
+    stream >> variable.r;
+    stream >> variable.g;
+    stream >> variable.b;
+    return stream;
+}
+
+std::istream& operator>>(std::istream& stream, Point& variable) {
+    stream >> variable.x;
+    stream >> variable.y;
+    return stream;
+}
+
 World::World(const std::string& worldFilePath) {
 
     std::ifstream stream(worldFilePath);
@@ -32,15 +47,15 @@ World::World(const std::string& worldFilePath) {
      * как и (red, green, blue). Опять же, можно упростить
      * этот код, научившись читать сразу Point, Color...
      */
-    double x;
-    double y;
+//    double x;
+//    double y;
     double vx;
     double vy;
     double radius;
 
-    double red;
-    double green;
-    double blue;
+//    double red;
+//    double green;
+//    double blue;
 
     bool isCollidable;
 
@@ -49,9 +64,10 @@ World::World(const std::string& worldFilePath) {
     while (stream.peek(), stream.good()) {
         // Читаем координаты центра шара (x, y) и вектор
         // его скорости (vx, vy)
-        stream >> x >> y >> vx >> vy;
+
+        stream >> m_point >> vx >> vy;
         // Читаем три составляющие цвета шара
-        stream >> red >> green >> blue;
+        stream >> m_color;
         // Читаем радиус шара
         stream >> radius;
         // Читаем свойство шара isCollidable, которое
@@ -60,7 +76,7 @@ World::World(const std::string& worldFilePath) {
         // В базовой части задания этот параметр
         stream >> std::boolalpha >> isCollidable;
 
-        Ball ball(radius, x, y, vx, vy, red, green, blue);
+        Ball ball(radius, m_point, vx, vy, m_color);
 
         // TODO: место для доработки.
         // Здесь не хватает самого главного - создания

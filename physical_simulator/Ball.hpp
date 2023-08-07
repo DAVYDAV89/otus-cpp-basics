@@ -11,7 +11,7 @@ class Ball {
     Point       m_center;
     Color       m_color;
 public:
-    Ball(double _radius, double _x, double _y, double _vx, double _vy, double _red, double _green, double _blue);
+    Ball(double _radius, Point _point, double _vx, double _vy, Color _color);
 
     void setVelocity(const Velocity& velocity);
     Velocity getVelocity() const;
