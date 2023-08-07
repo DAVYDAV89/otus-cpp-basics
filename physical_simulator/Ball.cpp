@@ -6,12 +6,13 @@
  * @param velocity новое значение скорости
  */
 
-Ball::Ball(double _radius, Point _point, double _vx, double _vy , Color _color)
+Ball::Ball(double _radius, Point _point, double _vx, double _vy , Color _color, bool _collidable)
 {
     m_radius = _radius;
     m_center = _point;
     m_velocity.setVector(Point(_vx, _vy));
     m_color = _color;
+    m_collidable = _collidable;
 }
 
 void Ball::setVelocity(const Velocity& velocity) {
@@ -77,4 +78,9 @@ double Ball::getRadius() const {
 double Ball::getMass() const {
     // TODO: место для доработки
     return PI * pow(m_radius,3) * 4. / 3;
+}
+
+bool Ball::getCollidable() const
+{
+    return m_collidable;
 }

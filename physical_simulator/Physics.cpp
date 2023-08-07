@@ -24,10 +24,10 @@ void Physics::collideBalls(std::vector<Ball>& balls) const {
     for (auto a = balls.begin(); a != balls.end(); ++a) {
         for (auto b = std::next(a); b != balls.end(); ++b) {
             const double distanceBetweenCenters2 =
-                distance2(a->getCenter(), b->getCenter());
+                    distance2(a->getCenter(), b->getCenter());
             const double collisionDistance = a->getRadius() + b->getRadius();
             const double collisionDistance2 =
-                collisionDistance * collisionDistance;
+                    collisionDistance * collisionDistance;
 
             if (distanceBetweenCenters2 < collisionDistance2) {
                 processCollision(*a, *b, distanceBetweenCenters2);
@@ -60,16 +60,19 @@ void Physics::collideWithBox(std::vector<Ball>& balls) const {
 void Physics::move(std::vector<Ball>& balls) const {
     for (Ball& ball : balls) {
         Point newPos =
-            ball.getCenter() + ball.getVelocity().vector() * timePerTick;
+                ball.getCenter() + ball.getVelocity().vector() * timePerTick;
         ball.setCenter(newPos);
     }
 }
 
 void Physics::processCollision(Ball& a, Ball& b,
                                double distanceBetweenCenters2) const {
+    if (!a.getCollidable() || !b.getCollidable())
+        return;
+
     // нормированный вектор столкновения
     const Point normal =
-        (b.getCenter() - a.getCenter()) / std::sqrt(distanceBetweenCenters2);
+            (b.getCenter() - a.getCenter()) / std::sqrt(distanceBetweenCenters2);
 
     // получаем скорость в векторном виде
     const Point aV = a.getVelocity().vector();
@@ -77,9 +80,10 @@ void Physics::processCollision(Ball& a, Ball& b,
 
     // коэффициент p учитывает скорость обоих мячей
     const double p =
-        2 * (dot(aV, normal) - dot(bV, normal)) / (a.getMass() + b.getMass());
+            2 * (dot(aV, normal) - dot(bV, normal)) / (a.getMass() + b.getMass());
 
     // задаем новые скорости мячей после столкновения
     a.setVelocity(Velocity(aV - normal * p * a.getMass()));
     b.setVelocity(Velocity(bV + normal * p * b.getMass()));
+
 }

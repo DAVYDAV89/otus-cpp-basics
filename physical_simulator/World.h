@@ -11,10 +11,11 @@ class World {
     void show(Painter& painter) const;
     void update(double time);
 
+
+  private:
     Color m_color;
     Point m_point;
 
-  private:
     // Границы мира заданы углами прямоугольника
     Point topLeft;
     Point bottomRight;

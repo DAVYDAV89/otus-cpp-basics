@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Painter.h"
 #include <fstream>
+#include <iostream>
 
 
 // Длительность одного тика симуляции.
@@ -76,7 +77,7 @@ World::World(const std::string& worldFilePath) {
         // В базовой части задания этот параметр
         stream >> std::boolalpha >> isCollidable;
 
-        Ball ball(radius, m_point, vx, vy, m_color);
+        Ball ball(radius, m_point, vx, vy, m_color, isCollidable);
 
         // TODO: место для доработки.
         // Здесь не хватает самого главного - создания
@@ -87,6 +88,7 @@ World::World(const std::string& worldFilePath) {
         // сконструируем объект Ball ball;
         // добавьте его в конец контейнера вызовом
          balls.push_back(ball);
+
     }
 }
 
@@ -118,6 +120,7 @@ void World::update(double time) {
      * длительность тика, сохраняем остаток в restTime
      * и обрабатываем на следующей итерации.
      */
+
 
     // учитываем остаток времени, который мы не "доработали" при прошлом update
     time += restTime;
