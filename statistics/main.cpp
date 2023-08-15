@@ -27,10 +27,8 @@ int main() {
 
     double val = 0;
     while (std::cin >> val) {
-        for (size_t i = 0; i < statistics_count; ++i) {
-            for (const auto _el : list_statistics)
-                _el -> update(val);
-        }
+        for (const auto &_el : list_statistics)
+            _el -> update(val);
     }
 
     // Handle invalid input data
@@ -39,12 +37,13 @@ int main() {
         return 1;
     }
 
-    for (const auto _el : list_statistics)
+    for (const auto &_el : list_statistics)
         Statistics(_el, statistics_count);
 
+
     // Clear memory - delete all objects created by new
-    for (const auto _el : list_statistics)
-            delete  _el;
+    for (const auto &_el : list_statistics)
+        delete  _el;
 
     list_statistics.clear();
 
