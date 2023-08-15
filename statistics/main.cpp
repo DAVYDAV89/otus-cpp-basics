@@ -6,8 +6,10 @@
 #include <iostream>
 
 template < typename T >
-void Statistics ( T & _el, const size_t _statistics_count )
+void Statistics ( T & _el )
 {
+    const size_t _statistics_count = 1;
+
     // Print results if any
     for (size_t i = 0; i < _statistics_count; ++i) {
         std::cout << _el[i].name() << " = " << _el[i].eval() << std::endl;
@@ -38,7 +40,7 @@ int main() {
     }
 
     for (const auto &_el : list_statistics)
-        Statistics(_el, statistics_count);
+        Statistics(_el);
 
 
     // Clear memory - delete all objects created by new
