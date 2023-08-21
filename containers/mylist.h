@@ -43,63 +43,102 @@ public:
 
         while (current != nullptr)
         {
-           if (counter == _index)
-           {
-              return current->data;
-           }
-           current = current->Next;
-           counter++;
+            if (counter == _index)
+            {
+                return current->data;
+            }
+            current = current->Next;
+            counter++;
         }
     }
 
     Node<T>* move(int index)
     {
-      Node<T>* t = Head;
+        Node<T>* t = Head;
 
-      for (int i = 0; i < index; i++)
-        t = t->Next;
+        for (int i = 0; i < index; i++)
+            t = t->Next;
 
-      return t;
+        return t;
     }
+
+    void push_front(T _data)
+    {
+        Node<T> *elem = new Node<T>;
+
+        elem->data = _data;
+        elem->Prev = nullptr;
+        elem->Next = Head;
+        Head->Prev = elem;
+        Head = elem;
+
+        count_el++;
+    }
+
 
     void push_back(T _data)
     {
-        Node<T> *temp = new Node<T>;
-        temp->Next = nullptr;
-        temp->data = _data;
+        Node<T> *elem = new Node<T>;
         if (Head != nullptr) {
-            temp->Prev = Tail;
-            Tail->Next = temp;
-            Tail = temp;
+            elem->Next = nullptr;
+            elem->data = _data;
+
+            elem->Prev = Tail;
+            Tail->Next = elem;
+            Tail = elem;
         }
         else {
-            temp->Prev = nullptr;
-            Head = Tail = temp;
+            elem->Next = nullptr;
+            elem->Prev = nullptr;
+
+            elem->data = _data;
+            Head = Tail = elem;
         }
+
         count_el++;
     }
 
     void insert(int _index, T _data)
     {
-        Node<T> *temp = new Node<T>;
-        temp->Next = nullptr;
-        temp->data = _data;
+        Node<T> *elem = new Node<T>;
+
         if (Head == nullptr) {
-            temp->Prev = nullptr;
-            Head = Tail = temp;
+            elem->Next = nullptr;
+            elem->Prev = nullptr;
+
+            elem->data = _data;
+            Head = Tail = elem;
         }
         else {
             if (_index == 0) {
-                Node<T> *temp = new Node<T>;
-                temp->data = _data;
-                temp->Prev = nullptr;
-                temp->Next = Head;
-                Head->Prev = temp;
-                Head = temp;
+                elem->data = _data;
+                elem->Prev = nullptr;
+                elem->Next = Head;
+                Head->Prev = elem;
+                Head = elem;
             }
             else {
-                Node<T> *elemPrev = move(_index - 1);
-                Node<T> *elemCur = move(_index);
+                if (_index >= count_el) {
+                    elem->Next = nullptr;
+                    elem->data = _data;
+
+                    elem->Prev = Tail;
+                    Tail->Next = elem;
+                    Tail = elem;
+                }
+                else {
+                    Node<T> *elemPrev = move(_index - 1);
+                    Node<T> *elemCur = move(_index);
+
+                    Node<T> *elemIns = new Node<T>;
+                    elemIns->data = _data;
+
+                    elemIns->Next = elemCur;
+                    elemIns->Prev = elemPrev;
+
+                    elemPrev->Next = elemIns;
+                    elemCur->Prev = elemIns;
+                }
             }
         }
 
@@ -126,15 +165,34 @@ public:
 
     void erase (int _index)
     {
-//        Node<T> *el = Move(_index);
+        Node<T> *elemDel = move(_index - 1);
+//        if (_index == 0){
+//            Head = Head->Next;
+//            Head->Prev = nullptr;
+//        }
+//        else {
+//            if (_index < count_el) {
 
+                Node<T> *elemPrev   = move(_index - 2);
+                Node<T> *elemNex    = move(_index);
+
+                elemPrev->Next  = elemNex;
+                elemNex->Prev   = elemPrev;
+//            }
+//            if (_index >= count_el) {
+//                elemDel = Tail;
+//                Tail = Tail->Prev;
+//            }
+//        }
+
+        delete elemDel;
         count_el--;
     }
 
-//    void &operator[] ()
-//    {
+    //    void &operator[] ()
+    //    {
 
-//    }
+    //    }
 
 
 };
