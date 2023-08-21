@@ -18,8 +18,6 @@ void Statistics ( T & _el )
 
 int main() {
 
-    const size_t statistics_count = 1;
-
     std::list<IStatistics *>list_statistics;
 
     list_statistics.push_back(new Min{});

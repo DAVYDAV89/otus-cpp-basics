@@ -2,6 +2,8 @@
 #define STD_H
 
 #include "istatistics.h"
+#include <iostream>
+#include <vector>
 
 class Std : public IStatistics {
 public:
@@ -12,8 +14,11 @@ public:
     const char * name() const override;
 
 private:
-    double  m_std;
-    int     m_count;
+    int                     m_count;
+    double                  m_std;
+
+    double                  m_val;
+    std::vector<double>     m_vec;
 };
 
 #endif // STD_H
