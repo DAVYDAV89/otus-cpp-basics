@@ -7,6 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(containers
     main.cpp
-    myvec.h
+    myarray.h
     mylist.h
     )

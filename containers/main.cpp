@@ -1,28 +1,43 @@
 #include "mylist.h"
+#include "myarray.h"
 
 using namespace std;
+
+
+template <typename T>
+void do_it( T &_el)
+{
+    for (int i = 0; i < 10; i++ )
+        _el.push_back(i);
+    _el.show();
+    cout << "size: " << _el.size() << endl;
+
+    _el.erase(2);
+    _el.erase(3);
+    _el.erase(4);
+    _el.show();
+
+    _el.push_front(10);
+    _el.show();
+
+    _el.insert(_el.size() / 2, 20);
+    _el.show();
+
+    _el.push_back(30);
+    _el.show();
+}
+
 
 int main()
 {
     MyList<int> lst;
-    for (int i = 0; i < 10; i++ )
-        lst.push_back(i);
-    lst.show();
-    cout << "size: " << lst.size() << endl;
+    cout << "-----------MyList-------------" << endl;
+    do_it(lst);
 
-    lst.erase(3);
-    lst.erase(4);
-    lst.erase(5);
-    lst.show();
+    MyArray<int> arr;
+    cout << "-----------MyArray-------------" << endl;
+    do_it(arr);
 
-    lst.push_front(10);
-    lst.show();
-
-    lst.insert(lst.size() / 2, 20);
-    lst.show();
-
-    lst.push_back(30);
-    lst.show();
 
     return 0;
 }

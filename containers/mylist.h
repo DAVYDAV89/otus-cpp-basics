@@ -62,7 +62,7 @@ public:
         return t;
     }
 
-    void push_front(T _data)
+    void push_front(const T &_data)
     {
         Node<T> *elem = new Node<T>;
 
@@ -76,7 +76,7 @@ public:
     }
 
 
-    void push_back(T _data)
+    void push_back(const T &_data)
     {
         Node<T> *elem = new Node<T>;
         if (Head != nullptr) {
@@ -98,7 +98,7 @@ public:
         count_el++;
     }
 
-    void insert(int _index, T _data)
+    void insert(int _index, const T &_data)
     {
         Node<T> *elem = new Node<T>;
 
@@ -145,12 +145,12 @@ public:
         count_el++;
     }
 
-    void show()
+    void show() const
     {
         Node<T> *temp=Tail;
         temp = Head;
 
-        while (temp != NULL)
+        while (temp != nullptr)
         {
             std::cout << temp->data << " ";
             temp = temp->Next;
@@ -158,7 +158,7 @@ public:
         std::cout << "\n";
     }
 
-    int size()
+    int size() const
     {
         return count_el;
     }
@@ -166,35 +166,16 @@ public:
     void erase (int _index)
     {
         Node<T> *elemDel = move(_index - 1);
-//        if (_index == 0){
-//            Head = Head->Next;
-//            Head->Prev = nullptr;
-//        }
-//        else {
-//            if (_index < count_el) {
 
-                Node<T> *elemPrev   = move(_index - 2);
-                Node<T> *elemNex    = move(_index);
+        Node<T> *elemPrev   = move(_index - 2);
+        Node<T> *elemNex    = move(_index);
 
-                elemPrev->Next  = elemNex;
-                elemNex->Prev   = elemPrev;
-//            }
-//            if (_index >= count_el) {
-//                elemDel = Tail;
-//                Tail = Tail->Prev;
-//            }
-//        }
+        elemPrev->Next  = elemNex;
+        elemNex->Prev   = elemPrev;
 
         delete elemDel;
         count_el--;
     }
-
-    //    void &operator[] ()
-    //    {
-
-    //    }
-
-
 };
 
 #endif // MYLIST_H
