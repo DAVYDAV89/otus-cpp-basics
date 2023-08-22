@@ -93,7 +93,7 @@ public:
     {
         T* temp = new T[current];
         for (int i = 0; i < current; i++){
-            if (i >= _index) {
+            if (i >= _index - 1) {
                 temp[i] = arr[i+1];
             }
             else

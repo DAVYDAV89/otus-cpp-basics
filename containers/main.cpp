@@ -12,9 +12,9 @@ void do_it( T &_el)
     _el.show();
     cout << "size: " << _el.size() << endl;
 
-    _el.erase(2);
     _el.erase(3);
     _el.erase(4);
+    _el.erase(5);
     _el.show();
 
     _el.push_front(10);
