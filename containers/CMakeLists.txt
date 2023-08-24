@@ -10,3 +10,9 @@ add_executable(containers
     myarray.h
     mylist.h
     )
+add_executable(containers_test
+    main_test.cpp
+    myarray_test.h
+    mylist_test.h
+    )
+target_link_libraries(containers_test gtest)
