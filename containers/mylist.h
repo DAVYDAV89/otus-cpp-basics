@@ -146,6 +146,27 @@ public:
         count_el++;
     }
 
+    void erase (int _index)
+    {
+        if (_index > 0) {
+            Node<T> *elemDel = move(_index);
+
+            Node<T> *elemPrev   = move(_index - 1);
+            Node<T> *elemNex    = move(_index + 1);
+
+            elemPrev->Next  = elemNex;
+            elemNex->Prev   = elemPrev;
+
+            delete elemDel;
+            count_el--;
+        }
+        else {
+            Head = nullptr;
+            Tail = nullptr;
+            count_el = 0;
+        }
+    }
+
     void show() const
     {
         Node<T> *temp=Tail;
@@ -162,20 +183,6 @@ public:
     int size() const
     {
         return count_el;
-    }
-
-    void erase (int _index)
-    {
-        Node<T> *elemDel = move(_index - 1);
-
-        Node<T> *elemPrev   = move(_index - 2);
-        Node<T> *elemNex    = move(_index);
-
-        elemPrev->Next  = elemNex;
-        elemNex->Prev   = elemPrev;
-
-        delete elemDel;
-        count_el--;
     }
 };
 

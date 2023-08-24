@@ -94,7 +94,7 @@ public:
     {
         T* temp = new T[current];
         for (int i = 0; i < current; i++){
-            if (i >= _index - 1) {
+            if (i >= _index) {
                 temp[i] = arr[i+1];
             }
             else
@@ -187,7 +187,7 @@ TEST(MyArrayTest, EraseFromMiddle) {
     arr.push_back(3);
     arr.erase(arr.size() / 2);
     EXPECT_EQ(2, arr.size());
-    EXPECT_EQ(2, arr[0]);
+    EXPECT_EQ(1, arr[0]);
     EXPECT_EQ(3, arr[1]);
 }
 
