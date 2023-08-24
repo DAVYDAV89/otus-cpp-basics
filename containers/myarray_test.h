@@ -185,7 +185,6 @@ TEST(MyArrayTest, EraseFromMiddle) {
     arr.push_back(1);
     arr.push_back(2);
     arr.push_back(3);
-    arr.show();
     arr.erase(arr.size() / 2);
     EXPECT_EQ(2, arr.size());
     EXPECT_EQ(2, arr[0]);
