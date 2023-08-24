@@ -66,12 +66,21 @@ public:
     void push_front(const T &_data)
     {
         Node<T> *elem = new Node<T>;
+        if (Head != nullptr) {
 
-        elem->data = _data;
-        elem->Prev = nullptr;
-        elem->Next = Head;
-        Head->Prev = elem;
-        Head = elem;
+            elem->data = _data;
+            elem->Prev = nullptr;
+            elem->Next = Head;
+            Head->Prev = elem;
+            Head = elem;
+        }
+        else {
+            elem->Next = nullptr;
+            elem->Prev = nullptr;
+
+            elem->data = _data;
+            Head = Tail = elem;
+        }
 
         count_el++;
     }
