@@ -2,6 +2,7 @@
 #define MYVEC_H
 
 #include <iostream>
+#include <gtest/gtest.h>
 
 template <typename T>
 class MyArray
